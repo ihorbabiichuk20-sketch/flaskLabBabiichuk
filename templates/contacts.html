@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <h1 class="mb-3">Контакти</h1>
+    <p class="mb-4">
+      Якщо потрібно обговорити проєкт, навчальне завдання або технічні питання — можна залишити повідомлення
+      через форму праворуч.
+    </p>
+
+    <ul class="list-unstyled contact-list">
+      <li><strong>Email:</strong> example.email@gmail.com</li>
+      <li><strong>Telegram:</strong> @example_username</li>
+      <li><strong>Місто:</strong> Україна</li>
+    </ul>
+  </div>
+
+  <div class="col-lg-6">
+    <h2 class="h5 mb-3">Форма зворотного зв'язку</h2>
+
+    {% if message_sent %}
+      <div class="alert alert-success" role="alert">
+        Повідомлення надіслано (форма-заглушка, без реальної відправки).
+      </div>
+    {% endif %}
+
+    <form method="post" novalidate>
+      <div class="mb-3">
+        <label for="name" class="form-label">Ім'я</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Ваше ім'я">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Повідомлення</label>
+        <textarea class="form-control" id="message" name="message" rows="4"
+                  placeholder="Ваше повідомлення"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Надіслати</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
