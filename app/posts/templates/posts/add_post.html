@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% from "macros/form_macros.html" import render_field %}
+{% block title %}{{ title or "Post form" }}{% endblock %}
+{% block content %}
+  <h2 class="mb-4">{{ title or "Post form" }}</h2>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    {{ render_field(form.title) }}
+    {{ render_field(form.content) }}
+    <div class="form-check mb-3">
+      {{ form.is_active(class="form-check-input") }}
+      {{ form.is_active.label(class="form-check-label") }}
+    </div>
+    <div class="mb-3">
+      {{ form.publish_date.label(class="form-label") }}
+      {{ form.publish_date(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.category.label(class="form-label") }}
+      {{ form.category(class="form-select") }}
+    </div>
+    {{ form.submit(class="btn btn-primary") }}
+    <a href="{{ url_for('posts.list_posts') }}" class="btn btn-secondary ms-2">Cancel</a>
+  </form>
+{% endblock %}

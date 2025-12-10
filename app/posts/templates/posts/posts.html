@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Статті{% endblock %}
+{% block css %}
+  <link rel="stylesheet" href="{{ url_for('posts.static', filename='css/posts.css') }}">
+{% endblock %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Статті</h2>
+    <a href="{{ url_for('posts.add_post') }}" class="btn btn-success">Додати статтю</a>
+  </div>
+  {% if posts %}
+    <div class="row">
+      {% for post in posts %}
+        <div class="col-md-4 mb-4">
+          <div class="card post-card h-100">
+            <img src="{{ url_for('posts.static', filename='img/default.jpg') }}" class="card-img-top" alt="Зображення статті">
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ post.category|capitalize }} · {{ post.posted.strftime("%Y-%m-%d %H:%M") }}</h6>
+              <p class="card-text">{{ post.content[:120] }}{% if post.content|length > 120 %}...{% endif %}</p>
+              <a href="{{ url_for('posts.detail_post', id=post.id) }}" class="btn btn-primary btn-sm">Читати далі</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>Немає статей. Чому б не <a href="{{ url_for('posts.add_post') }}">створити першу</a>?</p>
+  {% endif %}
+{% endblock %}

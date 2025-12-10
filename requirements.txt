@@ -1,3 +1,5 @@
-Flask
+flask
+flask-sqlalchemy
+flask-migrate
+flask-wtf
 python-dotenv
-gunicorn

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Home - Flask Blog{% endblock %}
+{% block content %}
+  <div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-3">
+      <h1 class="display-5 fw-bold">Lab 6: ORM, SQLAlchemy, CRUD</h1>
+      <p class="col-md-8 fs-4">
+       тутуду лабораторна
+      </p>
+      <a href="{{ url_for('posts.list_posts') }}" class="btn btn-primary btn-lg">View posts</a>
+    </div>
+  </div>
+{% endblock %}
