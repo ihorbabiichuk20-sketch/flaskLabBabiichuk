@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% from "macros/_render_field.html" import render_field %}
+{% block title %}Контакти{% endblock %}
+{% block content %}
+<h1 class="mb-3">Форма зворотного зв'язку</h1>
+
+<form method="post" novalidate>
+    {{ form.csrf_token }}
+    {{ render_field(form.name) }}
+    {{ render_field(form.email) }}
+    {{ render_field(form.phone) }}
+    {{ render_field(form.subject) }}
+    <div class="mb-3">
+        {{ form.message.label(class_="form-label") }}
+        {% if form.message.errors %}
+            {{ form.message(class_="form-control is-invalid", rows="4") }}
+            {% for error in form.message.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        {% else %}
+            {{ form.message(class_="form-control", rows="4") }}
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form.submit(class_="btn btn-primary") }}
+    </div>
+</form>
+{% endblock %}

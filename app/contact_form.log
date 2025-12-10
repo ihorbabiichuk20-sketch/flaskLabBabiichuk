@@ -1,0 +1,2 @@
+2025-12-10 22:00:41,732 - INFO - Contact form submitted: {'name': 'Ігор', 'email': 'ihor.babiichuk.20@pnu.edu.ua', 'phone': '+380989845689', 'subject': 'support', 'message': '23324', 'ip': '127.0.0.1'}
+2025-12-10 22:05:31,206 - INFO - Contact form submitted: {'name': 'Nitro 5', 'email': 'ihor.babiichuk.20@pnu.edu.ua', 'phone': '+380989845689', 'subject': 'offer', 'message': '1221ewd', 'ip': '127.0.0.1'}

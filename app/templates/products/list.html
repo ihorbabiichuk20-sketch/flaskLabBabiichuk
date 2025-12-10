@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Ноутбуки{% endblock %}
+{% block content %}
+<h1 class="mb-3">Список ноутбуків</h1>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Бренд</th>
+            <th>Модель</th>
+            <th>Ціна, $</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for nb in notebooks %}
+        <tr>
+            <td>{{ nb.id }}</td>
+            <td>{{ nb.brand }}</td>
+            <td>{{ nb.model }}</td>
+            <td>{{ nb.price }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

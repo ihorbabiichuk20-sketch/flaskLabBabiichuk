@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "macros/_render_field.html" import render_field %}
+{% block title %}Вхід{% endblock %}
+{% block content %}
+<h1 class="mb-3">Вхід до системи</h1>
+
+<form method="post" novalidate>
+    {{ form.csrf_token }}
+    {{ render_field(form.username) }}
+    {{ render_field(form.password) }}
+    <div class="mb-3 form-check">
+        {{ form.remember(class_="form-check-input") }}
+        {{ form.remember.label(class_="form-check-label") }}
+    </div>
+    {{ form.submit(class_="btn btn-success") }}
+</form>
+
+{% if last_data %}
+<hr>
+<h2 class="mt-4">Останні надіслані дані форми</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>Логін/Email</th>
+        <td>{{ last_data.username }}</td>
+    </tr>
+    <tr>
+        <th>Запам'ятати</th>
+        <td>{{ last_data.remember }}</td>
+    </tr>
+</table>
+{% endif %}
+{% endblock %}

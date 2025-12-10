@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Профіль{% endblock %}
+{% block content %}
+<h1 class="mb-3">Профіль користувача</h1>
+
+<p>Вітаємо, <strong>{{ user.username }}</strong>!</p>
+
+<h2 class="mt-4">Тема оформлення</h2>
+<p>Поточна тема: 
+  {% if theme == "dark" %}
+    <span class="badge bg-dark">Темна</span>
+  {% else %}
+    <span class="badge bg-secondary">Світла</span>
+  {% endif %}
+</p>
+<a href="{{ url_for('users.change_theme', theme_name='light') }}" class="btn btn-outline-secondary btn-sm me-2">Світла</a>
+<a href="{{ url_for('users.change_theme', theme_name='dark') }}" class="btn btn-outline-dark btn-sm">Темна</a>
+
+<h2 class="mt-4">Робота з кукі</h2>
+<form method="post" action="{{ url_for('users.add_cookie') }}" class="row g-2 mb-3">
+    <div class="col-md-3">
+        <input type="text" name="key" class="form-control" placeholder="Ключ" required>
+    </div>
+    <div class="col-md-3">
+        <input type="text" name="value" class="form-control" placeholder="Значення" required>
+    </div>
+    <div class="col-md-3">
+        <input type="number" name="max_age_minutes" class="form-control" placeholder="Час життя (хв)">
+    </div>
+    <div class="col-md-3">
+        <button class="btn btn-primary w-100" type="submit">Додати кукі</button>
+    </div>
+</form>
+
+<form method="post" action="{{ url_for('users.delete_cookie') }}" class="row g-2 mb-3">
+    <div class="col-md-4">
+        <input type="text" name="key_to_delete" class="form-control" placeholder="Ключ для видалення">
+    </div>
+    <div class="col-md-4 d-grid">
+        <button class="btn btn-warning" type="submit" name="action" value="one">Видалити за ключем</button>
+    </div>
+    <div class="col-md-4 d-grid">
+        <button class="btn btn-danger" type="submit" name="action" value="all">Видалити всі (крім службових)</button>
+    </div>
+</form>
+
+<h3 class="mt-4">Поточні кукі</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ключ</th>
+            <th>Значення</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for key, value in cookies.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('users.logout') }}" class="btn btn-outline-danger mt-3">Вийти</a>
+{% endblock %}
