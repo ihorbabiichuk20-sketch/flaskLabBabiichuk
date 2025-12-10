@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Products</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price, ₴</th>
+      <th scope="col">In stock</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <th scope="row">{{ product.id }}</th>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      <td>
+        {% if product.in_stock %}
+          <span class="badge bg-success">Yes</span>
+        {% else %}
+          <span class="badge bg-secondary">No</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

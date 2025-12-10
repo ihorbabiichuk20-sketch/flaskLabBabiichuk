@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row align-items-center mb-4">
+  <div class="col-md-3 text-center mb-3 mb-md-0">
+    <img src="{{ url_for('static', filename='images/profile.svg') }}" alt="Фото Ігоря Бабійчука"
+         class="img-fluid rounded-circle resume-photo">
+  </div>
+  <div class="col-md-9">
+    <h1 class="mb-2">Ігор Бабійчук</h1>
+    <p class="lead mb-1">JavaScript-розробник / Backend-інженер</p>
+    <p class="text-muted mb-0">Спеціалізація: Java та серверна розробка.</p>
+  </div>
+</div>
+
+<section class="mb-4">
+  <h2 class="h4 section-title">Про себе</h2>
+  <p>
+    Займаюся JavaScript-розробкою та створенням серверної логіки. Працюю з backend-рішеннями,
+    приділяючи увагу структурі коду, маршрутизації та роботі з шаблонами. Цікавлюся розробкою
+    вебзастосунків, де чітко поєднуються фронтенд і бекенд.
+  </p>
+</section>
+
+<section class="mb-4">
+  <h2 class="h4 section-title">Освіта</h2>
+  <ul class="list-unstyled mb-0">
+    <li>
+      <strong>Комп'ютерні науки / Програмна інженерія</strong><br>
+      Університет, навчальна програма з акцентом на веброзробці, алгоритмах та роботі з базами даних.
+    </li>
+  </ul>
+</section>
+
+<section class="mb-4">
+  <h2 class="h4 section-title">Навички</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <ul>
+        <li>Проєктування серверної логіки</li>
+        <li>Розробка REST-інтерфейсів</li>
+        <li>Маршрутизація та робота з шаблонами</li>
+        <li>Налагодження та логування застосунків</li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <ul>
+        <li>Робота з системою контролю версій Git</li>
+        <li>Налаштування віртуального середовища</li>
+        <li>Підготовка до деплою вебзастосунків</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="mb-4">
+  <h2 class="h4 section-title">Технології</h2>
+  <ul class="list-inline mb-0">
+    <li class="list-inline-item badge bg-secondary me-1 mb-1">Java</li>
+    <li class="list-inline-item badge bg-secondary me-1 mb-1">JavaScript</li>
+    <li class="list-inline-item badge bg-secondary me-1 mb-1">Backend development</li>
+    <li class="list-inline-item badge bg-secondary me-1 mb-1">Flask (базовий рівень)</li>
+    <li class="list-inline-item badge bg-secondary me-1 mb-1">HTML5 / CSS3</li>
+    <li class="list-inline-item badge bg-secondary me-1 mb-1">Bootstrap</li>
+    <li class="list-inline-item badge bg-secondary me-1 mb-1">Git</li>
+  </ul>
+</section>
+
+<section class="mb-4">
+  <h2 class="h4 section-title">Досвід / Проєкти</h2>
+  <ul class="list-unstyled mb-0">
+    <li class="mb-2">
+      <strong>Невеликі вебсайти з Flask</strong><br>
+      Створення навчальних вебзастосунків із маршрутизацією, шаблонами та підключенням статичних ресурсів.
+    </li>
+    <li class="mb-2">
+      <strong>Серверна логіка на Java</strong><br>
+      Розробка backend-компонентів, робота з HTTP-запитами та базовими сервісами.
+    </li>
+  </ul>
+</section>
+{% endblock %}
