@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Вхід до системи{% endblock %}
+{% block content %}
+<div class="section-header">
+  <div>
+    <h2 class="section-title">Вхід до системи</h2>
+    <p class="section-caption">
+      Увійдіть, щоб створювати, редагувати та видаляти записи про ноутбуки.
+    </p>
+  </div>
+  <div>
+    <a class="btn btn-soft" href="{{ url_for('auth.register') }}">Створити новий акаунт</a>
+  </div>
+</div>
+<form method="post" novalidate>
+  {{ form.hidden_tag() }}
+  <div class="mb-3">
+    {{ form.username.label(class="form-label") }}
+    {{ form.username(class="form-control") }}
+    {% for error in form.username.errors %}
+      <div class="text-danger small">{{ error }}</div>
+    {% endfor %}
+  </div>
+  <div class="mb-3">
+    {{ form.password.label(class="form-label") }}
+    {{ form.password(class="form-control") }}
+    {% for error in form.password.errors %}
+      <div class="text-danger small">{{ error }}</div>
+    {% endfor %}
+  </div>
+  <button type="submit" class="btn btn-main">
+    Увійти
+  </button>
+</form>
+{% endblock %}

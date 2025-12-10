@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Список ноутбуків{% endblock %}
+{% block content %}
+<div class="section-header">
+  <div>
+    <h2 class="section-title">Список ноутбуків</h2>
+    <p class="section-caption">
+      Перегляд усіх записів із можливістю швидкого пошуку та сортування.
+    </p>
+  </div>
+  {% if current_user.is_authenticated %}
+  <div>
+    <a href="{{ url_for('notebooks.create_notebook') }}" class="btn btn-main">
+      + Створити ноутбук
+    </a>
+  </div>
+  {% endif %}
+</div>
+
+<form class="toolbar-inline mb-3" method="get">
+  <div>
+    <label class="form-label" for="search">Пошук за назвою</label>
+    <input type="text" class="form-control" id="search" name="search" value="{{ search }}">
+  </div>
+  <div>
+    <label class="form-label" for="sort_by">Сортувати за</label>
+    <select class="form-select" id="sort_by" name="sort_by">
+      <option value="name" {% if sort_by == 'name' %}selected{% endif %}>Назвою</option>
+      <option value="price" {% if sort_by == 'price' %}selected{% endif %}>Ціною</option>
+      <option value="created_at" {% if sort_by == 'created_at' %}selected{% endif %}>Датою створення</option>
+    </select>
+  </div>
+  <div>
+    <label class="form-label d-none d-md-block">&nbsp;</label>
+    <button type="submit" class="btn btn-soft w-100">
+      Застосувати
+    </button>
+  </div>
+</form>
+
+{% if notebooks %}
+  <div class="table-responsive">
+    <table class="table table-green table-striped table-hover align-middle">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Назва</th>
+          <th>Бренд</th>
+          <th>Ціна, $</th>
+          <th>Власник</th>
+          <th>Створено</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for nb in notebooks %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ nb.name }}</td>
+          <td>{{ nb.brand.name }}</td>
+          <td>{{ "%.2f"|format(nb.price) }}</td>
+          <td>{{ nb.owner.username }}</td>
+          <td>{{ nb.created_at.strftime("%Y-%m-%d %H:%M") }}</td>
+          <td class="text-end">
+            <a class="btn btn-soft btn-sm" href="{{ url_for('notebooks.notebook_detail', notebook_id=nb.id) }}">
+              Деталі
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p class="text-muted mb-0">Записів поки що немає. Додайте перший ноутбук.</p>
+{% endif %}
+{% endblock %}
