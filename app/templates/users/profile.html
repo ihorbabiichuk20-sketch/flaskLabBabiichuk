@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+  <div class="col-md-8">
+    <h1 class="h3 mb-2">Профіль користувача</h1>
+    <p class="mb-1">Вітаємо, <strong>{{ username }}</strong>!</p>
+    <p class="text-muted mb-2">
+      Ви успішно автентифіковані через сесію Flask.
+    </p>
+  </div>
+  <div class="col-md-4 text-md-end">
+    <a href="{{ url_for('users.logout') }}" class="btn btn-outline-danger mt-3 mt-md-0">
+      Вийти
+    </a>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-6">
+    <div class="card shadow-sm mb-3">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span>Кольорова схема сторінки</span>
+        <span class="badge bg-secondary text-capitalize">{{ current_theme }}</span>
+      </div>
+      <div class="card-body">
+        <p class="mb-3">
+          Оберіть кольорову схему для цієї сторінки. Вибір зберігається у кукі
+          <code>profile_theme</code> і буде використаний при наступних відвідуваннях.
+        </p>
+        <div class="d-flex gap-2">
+          <a href="{{ url_for('users.set_theme', theme_name='light') }}"
+             class="btn btn-sm btn-outline-primary {% if current_theme == 'light' %}active{% endif %}">
+            Світла
+          </a>
+          <a href="{{ url_for('users.set_theme', theme_name='dark') }}"
+             class="btn btn-sm btn-outline-dark {% if current_theme == 'dark' %}active{% endif %}">
+            Темна
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{# Простий приклад візуальної різниці теми #}
+<div class="row mb-4">
+  <div class="col-12">
+    <div class="p-3 rounded-3 border
+                {% if current_theme == 'dark' %}
+                    bg-dark text-light
+                {% else %}
+                    bg-light
+                {% endif %}">
+      <h2 class="h5">Демонстраційний блок теми</h2>
+      <p class="mb-0">
+        Цей блок змінює фон та колір тексту відповідно до обраної кольорової схеми.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow-sm">
+      <div class="card-header">
+        Додавання кукі
+      </div>
+      <div class="card-body">
+        <form method="post" action="{{ url_for('users.add_cookie') }}">
+          <div class="mb-3">
+            <label for="cookieKey" class="form-label">Ключ</label>
+            <input type="text" class="form-control" id="cookieKey" name="key" required>
+          </div>
+          <div class="mb-3">
+            <label for="cookieValue" class="form-label">Значення</label>
+            <input type="text" class="form-control" id="cookieValue" name="value" required>
+          </div>
+          <div class="mb-3">
+            <label for="cookieMaxAge" class="form-label">Термін дії (хвилини, необов'язково)</label>
+            <input type="number" class="form-control" id="cookieMaxAge" name="max_age_minutes" min="1">
+          </div>
+          <button type="submit" class="btn btn-primary">Додати кукі</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow-sm mb-3">
+      <div class="card-header">
+        Видалення кукі
+      </div>
+      <div class="card-body">
+        <form method="post" action="{{ url_for('users.delete_cookie') }}" class="mb-3">
+          <div class="mb-3">
+            <label for="cookieKeyToDelete" class="form-label">Ключ для видалення (для одиничного видалення)</label>
+            <input type="text" class="form-control" id="cookieKeyToDelete" name="key_to_delete">
+          </div>
+          <div class="d-flex gap-2">
+            <button type="submit" name="action" value="one" class="btn btn-outline-danger">
+              Видалити за ключем
+            </button>
+            <button type="submit" name="action" value="all" class="btn btn-outline-secondary">
+              Видалити всі (крім службових)
+            </button>
+          </div>
+        </form>
+        <p class="mb-0 text-muted">
+          Зверніть увагу: службові кукі (наприклад, <code>session</code>) не видаляються при масовому очищенні,
+          щоб не порушувати роботу Flask-сесій.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card shadow-sm">
+      <div class="card-header">
+        Поточні кукі
+      </div>
+      <div class="card-body table-responsive">
+        {% if cookies %}
+          <table class="table table-sm align-middle">
+            <thead>
+              <tr>
+                <th scope="col">Ключ</th>
+                <th scope="col">Значення</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for key, value in cookies %}
+                <tr>
+                  <td><code>{{ key }}</code></td>
+                  <td>{{ value }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p class="mb-0 text-muted">Наразі немає збережених кукі.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
